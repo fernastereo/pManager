@@ -15,6 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/who', function(){return 'Quien mierda eres tu?';});
 
 Auth::routes();
 
