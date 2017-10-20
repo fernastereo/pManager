@@ -11,7 +11,7 @@ class Company extends Model
     	'name', 
     	'descripcion', 
     	'user_id'
-    ]
+    ];
 
 	public function user(){
     	return $this->belongsTo('App\User');
