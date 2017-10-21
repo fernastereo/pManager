@@ -1,11 +1,39 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="col-md-12 col-lg-12 col-sm-12 pull-left">
+    <div class="row col-md-9 col-lg-9 col-sm-9 pull-left">
       <!-- Example row of columns -->
-      <div class="row" style="background: white; margin: 10px;">
+      <div class="row col-md-12 col-lg-12 col-sm-12" style="background: white; margin: 10px;">
 
+        <form method="post" action="{{ route('companies.update', [$company->id]) }}">
+          {{ csrf_field() }} <!--//This protect your application from cross-site request forgery (CSRF) attacks. -->
+          <input type="hidden" name="_method" value="put"> <!-- Aqui definimos que el metodo es Put, a pesar de que en el form diga otra cosa-->
+          <div class="form-group">
+            <label for="company-name">Nombre:<span class="required"></span></label>
+            <input placeholder="Nombre de la Compañía"
+                   id="company-name"
+                   required="true" 
+                   name="name"
+                   spellcheck="false" 
+                   class="form-control"
+                   value="{{ $company->name }}">
+          </div>
+          <div class="form-group">
+            <label for="company-content">Descripción:</label>
+            <textarea placeholder="Escriba la Descripción"
+                   style="resize: vertical;" 
+                   id="company-content"
+                   name="description"
+                   rows="5"
+                   spellcheck="False"
+                   class="form-control autosize-target text-left">
+            {{ $company->description }}
+            </textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
       </div>
+
 
       <!-- Site footer -->
       <footer class="footer">
@@ -21,9 +49,8 @@
       <div class="sidebar-module">
         <h4>Actions</h4>
         <ol class="list-unstyled">
-          <li><a href="/companies/{{ $company->id }}/edit">Edit</a></li>
-          <li><a href="#">Delete</a></li>
-          <li><a href="#">Add New Member</a></li>
+          <li><a href="/companies">Ver todas las Compañías</a></li>
+          <li><a href="/companies/{{ $company->id }}">Ver Compañía</a></li>
         </ol>
       </div>
       <!--<div class="sidebar-module">

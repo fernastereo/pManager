@@ -25,7 +25,7 @@ class CompaniesController extends Controller
      */
     public function create()
     {
-        echo "Companies Create";
+        return view('companies.create');
     }
 
     /**
@@ -75,7 +75,17 @@ class CompaniesController extends Controller
      */
     public function update(Request $request, Company $company)
     {
-        //
+        //Guardar los datos recibidos de la vista edit
+        $companyUpdate = Company::where('id', $company->id)->update(['name' => $request->input('name'), 
+            'description' => $request->input('description')
+        ]);
+
+        if($companyUpdate){
+            return redirect()->route('companies.show', ['company' => $company->id])->with('success', 'Compañía actualizada satisfactoriamente');
+        }
+
+        //Redireccionar si falla
+        return back()->withInput();
     }
 
     /**
@@ -86,6 +96,12 @@ class CompaniesController extends Controller
      */
     public function destroy(Company $company)
     {
-        //
+        $findCompany = Company::find($company->id);
+        if($findCompany->delete()){
+
+            return redirect()->route('companies.index')->with('success', 'Compañía borrada!');
+        }
+
+        return back()->withInput()->with('error', 'Ocurrió un error derante la petición');
     }
 }
