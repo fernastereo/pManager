@@ -29,7 +29,7 @@ class CreateUsersTable extends Migration
             $table->string('middle_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('city')->nullable();
-            $table->integer('role_id')->unsigned();
+            $table->integer('role_id')->unsigned()->default(1);
             $table->foreign('role_id')->references('id')->on('roles');
         });
     }

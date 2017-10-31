@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Company;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CompaniesController extends Controller
 {
@@ -14,8 +15,12 @@ class CompaniesController extends Controller
      */
     public function index()
     {
-        $companies = Company::all();
-        return view('companies.index', ['companies' => $companies]);
+        if(Auth::check()){
+            $companies = Company::where('user_id', Auth::user()->id)->get();
+
+            return view('companies.index', ['companies' => $companies]);
+        }
+        return view('auth.login');
     }
 
     /**
@@ -36,7 +41,19 @@ class CompaniesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(Auth::check()){
+            $company = Company::create([
+                'name' => $request->input('name'), 
+                'description' => $request->input('description'), 
+                'user_id' => Auth::user()->id
+            ]);
+
+            if($company){
+                return redirect()->route('companies.show', ['company' => $company->id])->with('success', 'Compañía creada satisfactoriamente');
+            }
+        }
+
+        return back()->withInput()->with('errors', 'Ocurrió un error al crear el registro');
     }
 
     /**
@@ -85,7 +102,7 @@ class CompaniesController extends Controller
         }
 
         //Redireccionar si falla
-        return back()->withInput();
+        return back()->withInput()->with('errors', 'Ocurrió un error al actualizar el registro');
     }
 
     /**

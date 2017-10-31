@@ -19,8 +19,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('companies', 'CompaniesController');
-Route::resource('projects', 'ProjectsController');
-Route::resource('roles', 'RolesController');
-Route::resource('tasks', 'TasksController');
-Route::resource('users', 'UsersController');
+Route::middleware(['auth'])->group(function(){
+	Route::get('projects/create/{company_id?}', 'ProjectsController@create'); //el ? indica que es opcional el parametro
+	Route::resource('companies', 'CompaniesController');
+	Route::resource('projects', 'ProjectsController');
+	Route::resource('roles', 'RolesController');
+	Route::resource('tasks', 'TasksController');
+	Route::resource('users', 'UsersController');
+	Route::resource('comments', 'CommentsController');
+});

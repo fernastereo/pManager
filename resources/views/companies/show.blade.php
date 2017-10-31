@@ -10,12 +10,26 @@
 
       <!-- Example row of columns -->
       <div class="row" style="background: white; margin: 10px;">
-        @foreach($company->projects as $project)
-        <div class="col-lg-4">
-          <h2>{{ $project->name }}</h2>
-          <p class="text-danger">{{ $project->description }}</p>
-          <p><a class="btn btn-primary" href="/projects/{{ $project->id }}" role="button">View Project »</a></p>
+        <div class="panel">
+          <div class="panel-body">
+            <a href="/projects/create/{{ $company->id }}" class="pull-right btn btn-default">Add Project</a>
+          </div>
         </div>
+        
+        @foreach($company->projects as $project)
+          <div class="col-lg-4">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3>{{ $project->name }}</h3>
+              </div>
+              <div class="panel-body">
+                <p class="text-justify">{{ $project->description }}</p>
+              </div>
+              <div class="panel-footer">
+                <p><a class="btn btn-primary" href="/projects/{{ $project->id }}" role="button">View Project »</a></p>
+              </div>
+            </div>
+          </div>
         @endforeach
       </div>
 
@@ -52,7 +66,7 @@
               {{ csrf_field() }}
             </form>
           </li>
-          <li><a href="#">Add New Member</a></li>
+          <li><a href="/projects/create/{{ $company->id }}">Add Project</a></li>
         </ol>
       </div>
       <!--<div class="sidebar-module">
