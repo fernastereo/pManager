@@ -17,7 +17,7 @@ class ProjectsController extends Controller
     public function index()
     {
         if(Auth::check()){
-            $projects = Project::where('user_id', Auth::user()->id)->get();
+            $projects = Project::where('user_id', Auth::user()->id)->paginate(4);
             return view('projects.index', ['projects' => $projects]);
         }
 

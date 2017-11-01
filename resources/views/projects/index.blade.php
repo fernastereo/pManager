@@ -11,6 +11,7 @@
             <li class="list-group-item"><a href="/projects/{{ $project->id }}">{{ $project->name }}</a></li>
           @endforeach
         </ul>
+        {{ $projects->links('vendor.pagination.default') }}
       </div>
     </div>
   </div>
