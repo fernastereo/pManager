@@ -48,34 +48,33 @@
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
-                            <li><a href="{{ route('companies.index') }}"><i class="fa fa-university" aria-hidden="true"></i> My Companies</a></li>
-                            <li><a href="{{ route('projects.index') }}">Projects</a></li>
-                            <li><a href="{{ route('tasks.index') }}">Tasks</a></li>
+                            <li><a href="{{ route('companies.index') }}"><i class="fa fa-university" aria-hidden="true" style="color:blue;"></i> My Companies</a></li>
+                            <li><a href="{{ route('projects.index') }}"><i class="fa fa-television" aria-hidden="true"></i> Projects</a></li>
+                            <li><a href="{{ route('tasks.index') }}"><i class="fa fa-tasks" aria-hidden="true" style="color:blue;"></i> Tasks</a></li>
                             @if(Auth::user()->role_id == 1)
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                        Admin<span class="caret"></span>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-lock" aria-hidden="true"></i> Admin<span class="caret"></span>
                                     </a>
 
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="{{ route('home') }}">All Companies</a></li>
-                                        <li><a href="{{ route('home') }}">All Projects</a></li>
-                                        <li><a href="{{ route('home') }}">All Tasks</a></li>
-                                        <li><a href="{{ route('home') }}">All Users</a></li>
+                                        <li><a href="{{ route('home') }}"><i class="fa fa-university" aria-hidden="true"></i> All Companies</a></li>
+                                        <li><a href="{{ route('home') }}"><i class="fa fa-television" aria-hidden="true"></i> All Projects</a></li>
+                                        <li><a href="{{ route('home') }}"><i class="fa fa-tasks" aria-hidden="true"></i> All Tasks</a></li>
+                                        <li><a href="{{ route('home') }}"><i class="fa fa-users" aria-hidden="true"></i> All Users</a></li>
                                     </ul>
                                 </li>
                             @endif
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-user" aria-hidden="true" style="color:blue;"></i>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{ route('home') }}">Dashboard</a></li>
+                                    <li><a href="{{ route('home') }}"><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</a></li>
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                                     document.getElementById('logout-form').submit();"><i class="fa fa-sign-out" aria-hidden="true"></i>
                                             Logout
                                         </a>
 

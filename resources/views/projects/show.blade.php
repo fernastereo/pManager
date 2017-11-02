@@ -48,14 +48,50 @@
 	          <button type="submit" class="btn btn-primary">Enviar</button>
 	        </form>      	
        	  </div>
+      	</div>
 
-       	  @foreach($project->comments as $comment)
-			<div class="col-lg-4 col-md-4 col-sm-4">
-				<h2>{{ $comment->body }}</h2>
-				<p class="text-justify">{{ $comment->url }}</p>
-				<p><a href="/projects/{{ $project->id }}" class="btn btn-primary" role="button">View Project</a></p>
+        <div class="panel">
+          <div class="panel-body">
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+		            <!-- Fluid width widget -->        
+		    	    <div class="panel panel-default">
+		                <div class="panel-heading">
+		                    <h3 class="panel-title">
+		                        <span class="glyphicon glyphicon-comment"></span> 
+		                        Recent Comments
+		                    </h3>
+		                </div>
+		                <div class="panel-body">
+		                    <ul class="media-list">
+		                    	@foreach($project->comments as $comment)
+		                        <li class="media">
+		                            <div class="media-left">
+		                                <img src="http://placehold.it/60x60" class="img-circle">
+		                            </div>
+		                            <div class="media-body">
+		                                <h4 class="media-heading">
+		                                    {{ $comment->user->name }}
+		                                    <br>
+		                                    <small>
+		                                        commented on <a href="#">{{ $comment->created_at }}</a>
+		                                    </small>
+		                                </h4>
+		                                <p>
+		                                    {{ $comment->body }}
+		                                </p>
+		                                Proof:
+		                                <a href="{{ $comment->url }}">{{ $comment->url }}</a>
+		                            </div>
+		                        </li>
+		                        @endforeach
+		                    </ul>
+		                </div>
+		            </div>
+		            <!-- End fluid width widget -->
+				</div>
 			</div>
-       	  @endforeach
+		  </div>
       	</div>
       </div>
 
